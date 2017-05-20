@@ -1,0 +1,23 @@
+version: '2'
+volumes:
+    data:
+        driver: local
+        driver_opts:
+            type: nfs
+            o: addr=LeChateauDL,rw
+            device: ":/data"
+services:
+    notebook:
+        privileged: true
+        image: jupyter
+        ports: 
+            - "8888:8888"
+        volumes:
+            - data:/data
+        command: "jupyter notebook --allow-root --NotebookApp.token='' --NotebookApp.password='' --notebook-dir=/data/notebooks --ip='*' --port=8888 --no-browser"
+        networks:
+            - flacnet
+networks:
+    flacnet:
+        external:
+            name: rabbitmq_flacnet

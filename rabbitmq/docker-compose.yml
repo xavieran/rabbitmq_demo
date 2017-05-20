@@ -1,0 +1,12 @@
+version: '2'
+services:
+    rabbitmq:
+        image: rabbitmq
+        ports:
+            - "5672:5672"
+        networks: 
+            - flacnet
+            - default
+networks:
+    flacnet:
+        driver: bridge
