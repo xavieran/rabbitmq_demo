@@ -21,8 +21,8 @@ services:
         deploy:
             mode: replicated
             replicas: 12
-        # placement: 
-        #        constraints: [node.role == worker]
+            placement: 
+                constraints: [node.role == worker]
                             
 networks:
     flacnet:
