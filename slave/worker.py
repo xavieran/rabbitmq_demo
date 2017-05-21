@@ -3,7 +3,9 @@
 import pika
 import time
 
-connection = pika.BlockingConnection(pika.ConnectionParameters('rabbitmq'))
+time.sleep(30)
+
+connection = pika.BlockingConnection(pika.ConnectionParameters('LeChateauDL'))
 channel = connection.channel()
 
 channel.queue_declare(queue='rpc_queue')
@@ -13,7 +15,7 @@ def on_request(ch, method, props, body):
 
     print(" [.] %d*2" % n)
     response = n*2
-    time.sleep(n)
+    time.sleep(5)
 
     ch.basic_publish(exchange='',
                      routing_key=props.reply_to,
@@ -25,5 +27,5 @@ def on_request(ch, method, props, body):
 channel.basic_qos(prefetch_count=1)
 channel.basic_consume(on_request, queue='rpc_queue')
 
-print(" [x] Awaiting RPC requests")
+print(" [*] Awaiting RPC requests")
 channel.start_consuming()

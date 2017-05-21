@@ -15,9 +15,3 @@ services:
         volumes:
             - data:/data
         command: "jupyter notebook --allow-root --NotebookApp.token='' --NotebookApp.password='' --notebook-dir=/data/notebooks --ip='*' --port=8888 --no-browser"
-        networks:
-            - flacnet
-networks:
-    flacnet:
-        external:
-            name: rabbitmq_flacnet

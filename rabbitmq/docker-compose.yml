@@ -4,9 +4,5 @@ services:
         image: rabbitmq
         ports:
             - "5672:5672"
-        networks: 
-            - flacnet
-            - default
-networks:
-    flacnet:
-        driver: bridge
+            - "15672:15672"
+            - "55672:55672"

@@ -4,6 +4,7 @@ services:
         image: rabbitmq
         ports:
             - "5672:5672"
+            - "15672:15672"
         networks:
             - flacnet
             - default
@@ -14,17 +15,15 @@ services:
                 constraints: [node.role == manager]
     slave:
         image: slave
-        ports:
-            - "33672:33672"
         networks:
             - flacnet
             - default
         deploy:
             mode: replicated
-            replicas: 2
-            placement: 
-                constraints: [node.role == worker]
-        
+            replicas: 12
+        # placement: 
+        #        constraints: [node.role == worker]
+                            
 networks:
     flacnet:
         driver: overlay
